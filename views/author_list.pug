@@ -1,0 +1,20 @@
+extends layout
+
+mixin livingInterval(birthDate, deathDate)
+    if !birthDate
+        span ( - )
+    else 
+        span (#{birthDate} - #{deathDate ? deathDate : "today"})
+
+
+block content
+    h1= title
+
+    if author_list.length
+        ul
+            each author in author_list
+                li
+                    a(href=author.url) #{author.name} 
+                    +livingInterval(author.formatted_birth, author.formatted_death)
+    else 
+        p There are no authors in this library (which is kinda weird).
